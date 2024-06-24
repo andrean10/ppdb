@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "181278162179",
+    "project_id": "ppdb-pami-7651b",
+    "storage_bucket": "ppdb-pami-7651b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181278162179:android:f54f46ecd1e2565c11bd36",
+        "android_client_info": {
+          "package_name": "com.exampl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAHMel2MyDJSf464an9yGPS_v87KIM0gE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:181278162179:android:cb20b6447968538911bd36",
+        "android_client_info": {
+          "package_name": "com.example.ppdb"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAHMel2MyDJSf464an9yGPS_v87KIM0gE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
