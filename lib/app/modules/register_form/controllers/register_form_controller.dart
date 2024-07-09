@@ -198,10 +198,8 @@ class RegisterFormController extends GetxController {
       birthCertificateRegistration.value = birthCertificateRegistrationC.text;
 
   void setSpecialNeeds(SpecialNeedsModel? value) {
-    if (value != null) {
-      specialNeedsC.text = value.title ?? '';
-      specialNeeds.value = value;
-    }
+    specialNeedsC.text = value?.title ?? '';
+    specialNeeds.value = value;
   }
 
   void setReligion(String? value) {

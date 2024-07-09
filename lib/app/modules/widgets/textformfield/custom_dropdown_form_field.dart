@@ -20,8 +20,9 @@ class CustomDropdownFormField<T> extends StatelessWidget {
   final List<T>? items;
   final Future<List<T>> Function(String)? asyncItems;
   final String Function(T)? itemAsString;
-  // final List<Widget> Function(BuildContext)? selectedItemBuilder;
+  final T? selectedItem;
   final bool isShowSearchBox;
+  final Widget? suffix;
   final ValueChanged<T?>? onChanged;
   final String? Function(T?)? validator;
   final TypeDropDown? type;
@@ -35,9 +36,10 @@ class CustomDropdownFormField<T> extends StatelessWidget {
     this.hintText,
     this.items,
     this.asyncItems,
-    // this.selectedItemBuilder,
+    this.selectedItem,
     this.itemAsString,
     this.isShowSearchBox = false,
+    this.suffix,
     this.onChanged,
     this.validator,
     this.type = TypeDropDown.menu,
@@ -58,11 +60,13 @@ class CustomDropdownFormField<T> extends StatelessWidget {
           ),
         const Gap(8),
         DropdownSearch<T>(
+          items: items ?? [],
           asyncItems: asyncItems,
           itemAsString: itemAsString,
-          items: items ?? [],
+          selectedItem: selectedItem,
           dropdownButtonProps: DropdownButtonProps(
             focusNode: focusNode,
+            icon: const Icon(Icons.keyboard_arrow_down_rounded),
           ),
           onChanged: onChanged,
           dropdownDecoratorProps: DropDownDecoratorProps(
@@ -75,7 +79,7 @@ class CustomDropdownFormField<T> extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
-              suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
+              suffix: suffix,
             ),
           ),
           popupProps: builderPopupProps(theme),

@@ -35,6 +35,8 @@ class RegisterFormView extends GetView<RegisterFormController> {
   }
 
   Widget builderForm(BuildContext context) {
+    final textTheme = context.textTheme;
+
     return Form(
       key: controller.formKey,
       child: Column(
@@ -56,7 +58,7 @@ class RegisterFormView extends GetView<RegisterFormController> {
           const Gap(12),
           builderBirthCertificateRegistration(),
           const Gap(12),
-          builderSpecialNeeds(),
+          builderSpecialNeeds(textTheme),
           const Gap(12),
           builderReligion(),
           const Gap(12),
@@ -129,7 +131,7 @@ class RegisterFormView extends GetView<RegisterFormController> {
       title: 'Jenis Kelamin*',
       hintText: 'Pilih Jenis Kelamin',
       items: controller.dataGender.values.toList(),
-      // onChanged: controller.setGender,
+      onChanged: controller.setGender,
       validator: (value) => Validation.formField(
         value: value,
         titleField: 'Jenis Kelamin',
@@ -276,25 +278,31 @@ class RegisterFormView extends GetView<RegisterFormController> {
     );
   }
 
-  Widget builderSpecialNeeds() {
-    return CustomDropdownFormField(
-      controller: controller.nationalityC,
-      focusNode: controller.nationalityF,
-      title: 'Berkebutuhan Khusus',
-      hintText: 'Pilih Berkebutuhan Khusus',
-      isShowSearchBox: true,
-      asyncItems: (_) => controller.fetchAllSpecialNeeds(),
-      itemAsString: (item) {
-        if (item.title != null && item.category != null) {
-          return '${item.title} (${item.category})';
-        }
-        return '';
-      },
-      onChanged: controller.setSpecialNeeds,
-      // validator: (value) => Validation.formField(
-      //   value: value?.title,
-      //   titleField: 'Berkebutuhan Khusus',
-      // ),
+  Widget builderSpecialNeeds(TextTheme textTheme) {
+    return Obx(
+      () => CustomDropdownFormField(
+        controller: controller.specialNeedsC,
+        focusNode: controller.specialNeedsF,
+        title: 'Berkebutuhan Khusus',
+        hintText: 'Pilih Berkebutuhan Khusus',
+        isShowSearchBox: true,
+        suffix: InkWell(
+          onTap: () => controller.setSpecialNeeds(null),
+          child: Text(
+            'Reset',
+            style: textTheme.labelLarge,
+          ),
+        ),
+        asyncItems: (_) => controller.fetchAllSpecialNeeds(),
+        itemAsString: (item) {
+          if (item.title != null && item.category != null) {
+            return '${item.title} (${item.category})';
+          }
+          return '';
+        },
+        selectedItem: controller.specialNeeds.value,
+        onChanged: controller.setSpecialNeeds,
+      ),
     );
   }
 
