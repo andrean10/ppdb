@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
-  final EdgeInsets? padding;
+  final EdgeInsets? outPadding;
+  final EdgeInsets? inPadding;
   final ShapeBorder? shape;
   final Color? color;
   final double? elevation;
@@ -10,7 +11,8 @@ class CustomCard extends StatelessWidget {
 
   const CustomCard({
     super.key,
-    this.padding,
+    this.outPadding,
+    this.inPadding,
     this.shape,
     this.color,
     this.elevation,
@@ -21,13 +23,20 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: padding ?? const EdgeInsets.all(0),
+      padding: outPadding ?? const EdgeInsets.all(0),
       child: Card(
         shape: shape,
         color: color,
         elevation: elevation,
         clipBehavior: clip,
-        child: child,
+        child: Padding(
+          padding: inPadding ??
+              const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 16,
+              ),
+          child: child,
+        ),
       ),
     );
   }

@@ -4,9 +4,12 @@ abstract class Validation {
   static String? formField({
     required String titleField,
     required String? value,
-    isNumericOnly = false,
-    isEmail = false,
+    bool isNumericOnly = false,
+    bool isEmail = false,
+    bool isNotZero = false,
     num minLength = 0,
+    String? messageEmpty,
+    String? messageMinChar,
   }) {
     if (value != null) {
       if (value.isEmpty) {
@@ -15,18 +18,25 @@ abstract class Validation {
 
       if (isNumericOnly) {
         if (!value.isNumericOnly) {
-          return 'Inputan $titleField harus berupa angka!';
+          return messageEmpty ?? 'Inputan $titleField harus berupa angka!';
+        }
+
+        if (isNotZero) {
+          if (int.parse(value) == 0) {
+            return 'Nilai field harus lebih dari 0';
+          }
         }
       }
 
       if (isEmail) {
         if (!value.isEmail) {
-          return '$titleField harus berupa email';
+          return 'Format $titleField tidak sesuai';
         }
       }
 
       if (value.length.isLowerThan(minLength)) {
-        return '$titleField minimal harus $minLength karakter!';
+        return messageMinChar ??
+            '$titleField minimal harus $minLength karakter!';
       }
     }
     return null;

@@ -21,7 +21,6 @@ CountriesModel _$CountriesModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$CountriesModel {
   String? get name => throw _privateConstructorUsedError;
-  String? get flag => throw _privateConstructorUsedError;
   String? get unicodeFlag => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +35,7 @@ abstract class $CountriesModelCopyWith<$Res> {
           CountriesModel value, $Res Function(CountriesModel) then) =
       _$CountriesModelCopyWithImpl<$Res, CountriesModel>;
   @useResult
-  $Res call({String? name, String? flag, String? unicodeFlag});
+  $Res call({String? name, String? unicodeFlag});
 }
 
 /// @nodoc
@@ -53,17 +52,12 @@ class _$CountriesModelCopyWithImpl<$Res, $Val extends CountriesModel>
   @override
   $Res call({
     Object? name = freezed,
-    Object? flag = freezed,
     Object? unicodeFlag = freezed,
   }) {
     return _then(_value.copyWith(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      flag: freezed == flag
-          ? _value.flag
-          : flag // ignore: cast_nullable_to_non_nullable
               as String?,
       unicodeFlag: freezed == unicodeFlag
           ? _value.unicodeFlag
@@ -81,7 +75,7 @@ abstract class _$$CountriesModelImplCopyWith<$Res>
       __$$CountriesModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? name, String? flag, String? unicodeFlag});
+  $Res call({String? name, String? unicodeFlag});
 }
 
 /// @nodoc
@@ -96,17 +90,12 @@ class __$$CountriesModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
-    Object? flag = freezed,
     Object? unicodeFlag = freezed,
   }) {
     return _then(_$CountriesModelImpl(
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      flag: freezed == flag
-          ? _value.flag
-          : flag // ignore: cast_nullable_to_non_nullable
               as String?,
       unicodeFlag: freezed == unicodeFlag
           ? _value.unicodeFlag
@@ -121,8 +110,7 @@ class __$$CountriesModelImplCopyWithImpl<$Res>
 class _$CountriesModelImpl
     with DiagnosticableTreeMixin
     implements _CountriesModel {
-  const _$CountriesModelImpl(
-      {required this.name, required this.flag, required this.unicodeFlag});
+  const _$CountriesModelImpl({required this.name, required this.unicodeFlag});
 
   factory _$CountriesModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$CountriesModelImplFromJson(json);
@@ -130,13 +118,11 @@ class _$CountriesModelImpl
   @override
   final String? name;
   @override
-  final String? flag;
-  @override
   final String? unicodeFlag;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CountriesModel(name: $name, flag: $flag, unicodeFlag: $unicodeFlag)';
+    return 'CountriesModel(name: $name, unicodeFlag: $unicodeFlag)';
   }
 
   @override
@@ -145,7 +131,6 @@ class _$CountriesModelImpl
     properties
       ..add(DiagnosticsProperty('type', 'CountriesModel'))
       ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('flag', flag))
       ..add(DiagnosticsProperty('unicodeFlag', unicodeFlag));
   }
 
@@ -155,14 +140,13 @@ class _$CountriesModelImpl
         (other.runtimeType == runtimeType &&
             other is _$CountriesModelImpl &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.flag, flag) || other.flag == flag) &&
             (identical(other.unicodeFlag, unicodeFlag) ||
                 other.unicodeFlag == unicodeFlag));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, flag, unicodeFlag);
+  int get hashCode => Object.hash(runtimeType, name, unicodeFlag);
 
   @JsonKey(ignore: true)
   @override
@@ -182,7 +166,6 @@ class _$CountriesModelImpl
 abstract class _CountriesModel implements CountriesModel {
   const factory _CountriesModel(
       {required final String? name,
-      required final String? flag,
       required final String? unicodeFlag}) = _$CountriesModelImpl;
 
   factory _CountriesModel.fromJson(Map<String, dynamic> json) =
@@ -190,8 +173,6 @@ abstract class _CountriesModel implements CountriesModel {
 
   @override
   String? get name;
-  @override
-  String? get flag;
   @override
   String? get unicodeFlag;
   @override

@@ -1,1 +1,40 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"ppdb-pami-7651b","appId":"1:181278162179:android:cb20b6447968538911bd36","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"ppdb-pami-7651b","appId":"1:181278162179:ios:b9790d75fe8ab85d11bd36","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"ppdb-pami-7651b","appId":"1:181278162179:ios:b9790d75fe8ab85d11bd36","uploadDebugSymbols":false,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"ppdb-pami-7651b","configurations":{"android":"1:181278162179:android:cb20b6447968538911bd36","ios":"1:181278162179:ios:b9790d75fe8ab85d11bd36","macos":"1:181278162179:ios:b9790d75fe8ab85d11bd36","web":"1:181278162179:web:e9fbe973e313eecb11bd36"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "ppdb-pami-7651b",
+          "appId": "1:181278162179:android:cb20b6447968538911bd36",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "ppdb-pami-7651b",
+          "appId": "1:181278162179:ios:b9790d75fe8ab85d11bd36",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "ppdb-pami-7651b",
+          "appId": "1:181278162179:ios:b9790d75fe8ab85d11bd36",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "ppdb-pami-7651b",
+          "configurations": {
+            "android": "1:181278162179:android:cb20b6447968538911bd36",
+            "ios": "1:181278162179:ios:b9790d75fe8ab85d11bd36",
+            "macos": "1:181278162179:ios:b9790d75fe8ab85d11bd36",
+            "web": "1:181278162179:web:e9fbe973e313eecb11bd36"
+          }
+        }
+      }
+    }
+  }
+}

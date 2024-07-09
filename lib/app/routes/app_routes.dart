@@ -11,6 +11,11 @@ abstract class Routes {
   static const INFORMATION = _Paths.INFORMATION;
   static const ABOUT = _Paths.ABOUT;
   static const SOCIAL_MEDIA = _Paths.SOCIAL_MEDIA;
+  static const PROSPECTIVE_STUDENT_DATA = _Paths.PROSPECTIVE_STUDENT_DATA;
+  static const UPLOAD_FILE = _Paths.UPLOAD_FILE;
+  static const LIST_CANDIDATES = _Paths.LIST_CANDIDATES;
+  static const DETAIL_CANDIDATES = _Paths.DETAIL_CANDIDATES;
+  static const RECAPITULATION = _Paths.RECAPITULATION;
 }
 
 abstract class _Paths {
@@ -23,4 +28,9 @@ abstract class _Paths {
   static const INFORMATION = '/information';
   static const ABOUT = '/about';
   static const SOCIAL_MEDIA = '/socmed';
+  static const PROSPECTIVE_STUDENT_DATA = '/prospective-student-data';
+  static const UPLOAD_FILE = '/upload-file';
+  static const LIST_CANDIDATES = '/list-candidates';
+  static const DETAIL_CANDIDATES = '/detail-candidates';
+  static const RECAPITULATION = '/recapitulation';
 }

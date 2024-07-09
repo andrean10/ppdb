@@ -28,57 +28,63 @@ class LoginView extends GetView<LoginController> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final width = constraints.maxWidth;
-
-              return Center(
-                child: Cards.elevated(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 21,
-                      vertical: 42,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(
-                          ConstantsAssets.imgLogo,
-                          width: width / 2.5,
-                        ),
-                        const Gap(4),
-                        builderForm(),
-                        const Gap(12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AutoSizeText(
-                              'Belum Punya Akun?',
-                              style: textTheme.labelLarge,
-                            ),
-                            CustomTextButton(
-                              onPressed: controller.moveToRegister,
-                              child: const Text('Daftar'),
-                            ),
-                          ],
-                        ),
-                        const Gap(6),
-                        CustomFilledButton(
-                          width: double.infinity,
-                          onPressed: controller.confirm,
-                          isFilledTonal: false,
-                          child: const Text('Masuk'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
+        child: Center(
+          child: SingleChildScrollView(
+            child: builderCard(textTheme),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget builderCard(TextTheme textTheme) {
+    return Cards.elevated(
+      outPadding: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 32,
+      ),
+      inPadding: const EdgeInsets.symmetric(
+        horizontal: 21,
+        vertical: 42,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          LayoutBuilder(builder: (context, constraints) {
+            final maxWidth = constraints.maxWidth;
+
+            return Image.asset(
+              ConstantsAssets.imgLogo,
+              width: maxWidth / 2.5,
+            );
+          }),
+          const Gap(4),
+          builderForm(),
+          const Gap(12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AutoSizeText(
+                'Belum Punya Akun?',
+                style: textTheme.labelLarge,
+              ),
+              CustomTextButton(
+                onPressed: controller.moveToRegister,
+                child: const Text('Daftar'),
+              ),
+            ],
+          ),
+          const Gap(6),
+          Obx(
+            () => CustomFilledButton(
+              width: double.infinity,
+              onPressed: controller.confirm,
+              isFilledTonal: false,
+              state: controller.isLoading.value,
+              child: const Text('Masuk'),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -90,7 +96,9 @@ class LoginView extends GetView<LoginController> {
         mainAxisSize: MainAxisSize.min,
         children: [
           builderEmail(),
-          const Gap(12),
+          Obx(
+            () => controller.errMsg.value == null ? const Gap(12) : Container(),
+          ),
           builderPassword(),
         ],
       ),
@@ -106,11 +114,14 @@ class LoginView extends GetView<LoginController> {
         hintText: 'test@gmail.com',
         suffixIconState: controller.email.value.isNotEmpty,
         keyboardType: TextInputType.emailAddress,
+        textCapitalization: TextCapitalization.none,
+        maxLines: 1,
         validator: (value) => Validation.formField(
           value: value,
           titleField: 'Email',
           isEmail: true,
         ),
+        errorText: controller.errMsg.value != null ? '' : null,
       ),
     );
   }
@@ -133,6 +144,7 @@ class LoginView extends GetView<LoginController> {
                 : Icons.visibility_rounded,
           ),
         ),
+        onEditingComplete: controller.confirm,
         obscureText: controller.isHidePassword.value,
         maxLines: 1,
         validator: (value) => Validation.formField(
@@ -140,6 +152,7 @@ class LoginView extends GetView<LoginController> {
           titleField: 'Password',
           minLength: 6,
         ),
+        errorText: controller.errMsg.value,
       ),
     );
   }

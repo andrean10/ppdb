@@ -8,7 +8,6 @@ part 'countries_model.g.dart';
 class CountriesModel with _$CountriesModel {
   const factory CountriesModel({
     required String? name,
-    required String? flag,
     required String? unicodeFlag,
   }) = _CountriesModel;
 

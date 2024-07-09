@@ -7,11 +7,13 @@ import '../../../../utils/constants_assets.dart';
 import '../card/cards.dart';
 
 class CustomMainView extends StatelessWidget {
+  final Widget? title;
   final List<Widget>? actions;
   final Widget builder;
   final bool isBack;
 
   const CustomMainView({
+    this.title,
     this.actions,
     required this.builder,
     required this.isBack,
@@ -23,6 +25,7 @@ class CustomMainView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: Image.asset(ConstantsAssets.imgLogo),
+        title: title,
         actions: actions,
       ),
       body: LayoutBuilder(
@@ -44,30 +47,29 @@ class CustomMainView extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 18,
-                  ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Cards.elevated(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 12,
-                                vertical: 16,
-                              ),
-                              child: builder,
-                            ),
-                          ],
-                        ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Cards.elevated(
+                      outPadding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 18,
                       ),
-                      isBack
-                          ? Column(
+                      inPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 16,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          builder,
+                        ],
+                      ),
+                    ),
+                    isBack
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 const Gap(16),
@@ -78,10 +80,10 @@ class CustomMainView extends StatelessWidget {
                                   child: const Text('Kembali'),
                                 ),
                               ],
-                            )
-                          : Container(),
-                    ],
-                  ),
+                            ),
+                          )
+                        : Container(),
+                  ],
                 ),
               ),
             ],

@@ -3,16 +3,22 @@ import 'custom_card.dart';
 
 class Cards {
   static Widget elevated({
-    EdgeInsets? padding,
+    EdgeInsets? outPadding,
+    EdgeInsets? inPadding,
     required Widget child,
     Clip? clip,
   }) {
-    return CustomCard(padding: padding, child: child);
+    return CustomCard(
+      outPadding: outPadding,
+      inPadding: inPadding,
+      child: child,
+    );
   }
 
   static Widget filled({
     required BuildContext context,
-    EdgeInsets? padding,
+    EdgeInsets? outPadding,
+    EdgeInsets? inPadding,
     Clip? clip,
     required Widget child,
     ShapeBorder? shape,
@@ -20,7 +26,8 @@ class Cards {
   }) {
     return CustomCard(
       elevation: 0,
-      padding: padding,
+      outPadding: outPadding,
+      inPadding: inPadding,
       shape: shape,
       color: color ?? Theme.of(context).colorScheme.surfaceContainerHighest,
       child: child,
@@ -29,13 +36,15 @@ class Cards {
 
   static Widget outlined({
     required BuildContext context,
-    EdgeInsets? padding,
+    EdgeInsets? outPadding,
+    EdgeInsets? inPadding,
     Clip? clip,
     required Widget child,
     Color? color,
   }) {
     return CustomCard(
-      padding: padding,
+      outPadding: outPadding,
+      inPadding: inPadding,
       elevation: 0,
       shape: RoundedRectangleBorder(
         side: BorderSide(

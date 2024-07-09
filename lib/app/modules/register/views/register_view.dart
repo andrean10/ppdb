@@ -28,57 +28,63 @@ class RegisterView extends GetView<RegisterController> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final width = constraints.maxWidth;
-
-              return Center(
-                child: Cards.elevated(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 21,
-                      vertical: 42,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Image.asset(
-                          ConstantsAssets.imgLogo,
-                          width: width / 2.5,
-                        ),
-                        const Gap(4),
-                        builderForm(),
-                        const Gap(12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AutoSizeText(
-                              'Sudah Punya Akun?',
-                              style: textTheme.labelLarge,
-                            ),
-                            CustomTextButton(
-                              onPressed: controller.moveToLogin,
-                              child: const Text('Login'),
-                            ),
-                          ],
-                        ),
-                        const Gap(6),
-                        CustomFilledButton(
-                          width: double.infinity,
-                          onPressed: controller.confirm,
-                          isFilledTonal: false,
-                          child: const Text('Daftar'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              );
-            },
+        child: Center(
+          child: SingleChildScrollView(
+            child: builderCard(textTheme),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget builderCard(TextTheme textTheme) {
+    return Cards.elevated(
+      outPadding: const EdgeInsets.symmetric(
+        horizontal: 24,
+        vertical: 32,
+      ),
+      inPadding: const EdgeInsets.symmetric(
+        horizontal: 21,
+        vertical: 42,
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          LayoutBuilder(builder: (context, constraints) {
+            final maxWidth = constraints.maxWidth;
+
+            return Image.asset(
+              ConstantsAssets.imgLogo,
+              width: maxWidth / 2.5,
+            );
+          }),
+          const Gap(4),
+          builderForm(),
+          const Gap(12),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AutoSizeText(
+                'Sudah Punya Akun?',
+                style: textTheme.labelLarge,
+              ),
+              CustomTextButton(
+                onPressed: controller.moveToLogin,
+                child: const Text('Login'),
+              ),
+            ],
+          ),
+          const Gap(6),
+          Obx(
+            () => CustomFilledButton(
+              width: double.infinity,
+              onPressed: controller.confirm,
+              isFilledTonal: false,
+              state: controller.isLoading.value,
+              child: const Text('Daftar'),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -108,10 +114,10 @@ class RegisterView extends GetView<RegisterController> {
         hintText: 'test',
         suffixIconState: controller.username.value.isNotEmpty,
         keyboardType: TextInputType.name,
+        textCapitalization: TextCapitalization.none,
         validator: (value) => Validation.formField(
           value: value,
           titleField: 'Username',
-          isEmail: true,
         ),
       ),
     );
@@ -126,6 +132,8 @@ class RegisterView extends GetView<RegisterController> {
         hintText: 'test@gmail.com',
         suffixIconState: controller.email.value.isNotEmpty,
         keyboardType: TextInputType.emailAddress,
+        textCapitalization: TextCapitalization.none,
+        errorText: controller.errMsg.value,
         validator: (value) => Validation.formField(
           value: value,
           titleField: 'Email',
@@ -154,6 +162,7 @@ class RegisterView extends GetView<RegisterController> {
         ),
         obscureText: controller.isHidePassword.value,
         maxLines: 1,
+        onEditingComplete: controller.confirm,
         validator: (value) => Validation.formField(
           value: value,
           titleField: 'Password',

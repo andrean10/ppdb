@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomOutlinedButton extends StatelessWidget {
   final double? width;
   final double? height;
-  final Icon? icon;
+  final Widget? icon;
   final Widget child;
   final ButtonStyle? style;
   final VoidCallback? onPressed;
