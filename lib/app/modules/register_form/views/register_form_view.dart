@@ -28,7 +28,7 @@ class RegisterFormView extends GetView<RegisterFormController> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),ƒ
         child: builderForm(context),
       ),
     );

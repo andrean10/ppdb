@@ -29,7 +29,7 @@ class SplashController extends GetxController {
     try {
       if (_initC.auth.currentUser != null) {
         if (role != null) {
-          if (role == ROLE.admin.name) {
+          if (role == ROLE.admin.name || role == ROLE.kepsek.name) {
             Get.offAllNamed(
               Routes.MAIN,
               arguments: role,

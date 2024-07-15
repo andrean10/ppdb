@@ -3,17 +3,17 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyDiwjbxJIG0q2yQHDbmIICEGt9QiYrEps4</string>
+	<string>AIzaSyC8VTAungI-CRzIfr03c3xH_sMu0FWN8Z8</string>
 	<key>GCM_SENDER_ID</key>
-	<string>181278162179</string>
+	<string>937783297516</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.ppdb</string>
 	<key>PROJECT_ID</key>
-	<string>ppdb-pami-7651b</string>
+	<string>ppdb-pami-e93a1</string>
 	<key>STORAGE_BUCKET</key>
-	<string>ppdb-pami-7651b.appspot.com</string>
+	<string>ppdb-pami-e93a1.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:181278162179:ios:b9790d75fe8ab85d11bd36</string>
+	<string>1:937783297516:ios:b3828368f50260194d6cc9</string>
 </dict>
 </plist>

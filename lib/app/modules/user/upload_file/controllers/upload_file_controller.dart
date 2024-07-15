@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:ppdb/app/data/profile_model/profile_model.dart';
 import 'package:ppdb/app/data/upload_files_model/upload_files_model.dart';
 import 'package:ppdb/app/helpers/file_helper.dart';
 import 'package:ppdb/app/modules/init/controllers/init_controller.dart';
@@ -17,6 +18,7 @@ class UploadFileController extends GetxController
   late final InitController _initC;
   late final ScaffoldMessengerState sf;
   UploadTask? _uploadTask;
+  ProfileModel? profileModel;
 
   final loadingValue = 0.0.obs;
   final _isSuccessful = false.obs;
@@ -42,6 +44,8 @@ class UploadFileController extends GetxController
     if (Get.isRegistered<InitController>()) {
       _initC = Get.find<InitController>();
     }
+
+    profileModel = Get.arguments as ProfileModel?;
 
     sf = ScaffoldMessenger.of(Get.context!);
   }

@@ -14,7 +14,7 @@ import '../../../data/user_model/users_model.dart';
 import '../../../helpers/excel.dart';
 import '../../../routes/app_pages.dart';
 
-enum ROLE { admin, user }
+enum ROLE { admin, kepsek, user }
 
 class MainController extends GetxController {
   late final InitController _initC;
@@ -25,6 +25,8 @@ class MainController extends GetxController {
   final isApproved = false.obs;
   final isConfirmed = false.obs;
   var isUser = false;
+
+  ProfileModel? profileModel;
 
   @override
   void onInit() {
@@ -49,7 +51,7 @@ class MainController extends GetxController {
           ),
           MenuModel(
             icon: Symbols.patient_list_rounded,
-            title: 'Rekapitulasi Data PD',
+            title: 'Rekapitulasi',
             onPressed: _moveToDataRecapPD,
           ),
           MenuModel(
@@ -60,6 +62,16 @@ class MainController extends GetxController {
         ],
       );
       isUser = false;
+    }
+
+    if (args == ROLE.kepsek.name) {
+      listMenu.add(
+        MenuModel(
+          icon: Symbols.patient_list_rounded,
+          title: 'Rekapitulasi',
+          onPressed: _moveToDataRecapPD,
+        ),
+      );
     }
 
     if (args == ROLE.user.name) {
@@ -103,7 +115,10 @@ class MainController extends GetxController {
 
   void _moveToStudentData() => Get.toNamed(Routes.PROSPECTIVE_STUDENT_DATA);
 
-  void _moveToUploadFile() => Get.toNamed(Routes.UPLOAD_FILE);
+  void _moveToUploadFile() => Get.toNamed(
+        Routes.UPLOAD_FILE,
+        arguments: profileModel,
+      );
 
   void _moveToAboutSchool() => Get.toNamed(Routes.ABOUT);
 
@@ -160,10 +175,15 @@ class MainController extends GetxController {
       },
     ).listen(
       (event) {
+        profileModel = event;
+
         final itemPrintReceipt = MenuModel(
           icon: Icons.print_rounded,
           title: 'Cetak Resi',
-          onPressed: () => Receipt.print(event),
+          onPressed: () => Receipt.print(
+            initC: _initC,
+            profile: event,
+          ),
         );
 
         if (event.user.isApproved! && event.user.isConfirmed!) {

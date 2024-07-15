@@ -12,7 +12,7 @@ import '../../../../../shared/shared_method.dart';
 import '../../../../data/user_model/users_model.dart';
 
 class DetailCandidatesController extends GetxController {
-  late final InitController _initC;
+  late final InitController initC;
   late ProfileModel profile;
   final isLoadingApproved = false.obs;
   final isLoadingRejected = false.obs;
@@ -28,14 +28,14 @@ class DetailCandidatesController extends GetxController {
 
   void _init() {
     if (Get.isRegistered<InitController>()) {
-      _initC = Get.find<InitController>();
+      initC = Get.find<InitController>();
     }
 
     profile = Get.arguments as ProfileModel;
   }
 
   Future<ProfileModel>? fetchProfile() {
-    return _initC.firestore
+    return initC.firestore
         .collection(ConstantsValuesFirebase.colUploadFiles)
         .withConverter(
           fromFirestore: (snapshot, _) =>
@@ -50,7 +50,7 @@ class DetailCandidatesController extends GetxController {
   Stream<DocumentSnapshot<UsersModel>> streamUser() {
     final uid = profile.formSiswa?.createdBy;
 
-    return _initC.firestore
+    return initC.firestore
         .collection(ConstantsValuesFirebase.colUser)
         .withConverter(
           fromFirestore: (snapshot, _) => UsersModel.fromJson(snapshot.data()!),
@@ -66,24 +66,45 @@ class DetailCandidatesController extends GetxController {
     try {
       final uid = profile.formSiswa?.createdBy;
 
-      await _initC.firestore
+      final dataSiswa = await initC.firestore
           .collection(ConstantsValuesFirebase.colUser)
-          .doc(uid)
-          .update({
-        'isApproved': true,
-        'isConfirmed': true,
-        'noReceipt': FieldValue.increment(1)
-      });
+          .withConverter(
+            fromFirestore: (snapshot, _) =>
+                UsersModel.fromJson(snapshot.data()!),
+            toFirestore: (value, _) => value.toJson(),
+          )
+          .where(FieldPath.fromString('noRegis'), isNotEqualTo: null)
+          .orderBy(
+            FieldPath.fromString('noRegis'),
+            descending: true,
+          )
+          .limit(1)
+          .get();
 
-      showSnackbar(
-        content: 'Siswa ini telah anda terima pendaftarannya',
-        backgroundColor: Get.isDarkMode
-            ? SharedTheme.darkSuccessColor
-            : SharedTheme.lightSuccessColor,
-        duration: 3.seconds,
-      );
+      if (dataSiswa.docs.isNotEmpty && dataSiswa.docs.first.exists) {
+        final noRegis = dataSiswa.docs.first.data().noRegis;
+
+        if (noRegis != null) {
+          await initC.firestore
+              .collection(ConstantsValuesFirebase.colUser)
+              .doc(uid)
+              .update({
+            'isApproved': true,
+            'isConfirmed': true,
+            'noRegis': noRegis + 1,
+          });
+        }
+
+        showSnackbar(
+          content: 'Siswa ini telah anda terima pendaftarannya',
+          backgroundColor: Get.isDarkMode
+              ? SharedTheme.darkSuccessColor
+              : SharedTheme.lightSuccessColor,
+          duration: 3.seconds,
+        );
+      }
     } on FirebaseException catch (e) {
-      _initC.logger.e(
+      initC.logger.e(
         'Error: ',
         error: e,
         stackTrace: e.stackTrace,
@@ -100,7 +121,7 @@ class DetailCandidatesController extends GetxController {
     try {
       final uid = profile.formSiswa?.createdBy;
 
-      await _initC.firestore
+      await initC.firestore
           .collection(ConstantsValuesFirebase.colUser)
           .doc(uid)
           .update({
@@ -116,7 +137,7 @@ class DetailCandidatesController extends GetxController {
         duration: 3.seconds,
       );
     } on FirebaseException catch (e) {
-      _initC.logger.e(
+      initC.logger.e(
         'Error: ',
         error: e,
         stackTrace: e.stackTrace,

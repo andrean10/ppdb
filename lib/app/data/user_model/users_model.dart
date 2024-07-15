@@ -12,6 +12,7 @@ class UsersModel with _$UsersModel {
     required String role,
     required bool? isApproved,
     required bool? isConfirmed,
+    int? noRegis,
   }) = _UsersModel;
 
   factory UsersModel.fromJson(Map<String, dynamic> json) =>

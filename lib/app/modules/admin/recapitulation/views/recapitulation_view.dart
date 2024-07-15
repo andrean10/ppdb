@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../helpers/text_helper.dart';
 import '../../../widgets/container_title/container_title.dart';
@@ -24,6 +25,8 @@ class RecapitulationView extends GetView<RecapitulationController> {
           StreamBuilder(
             stream: controller.fetchUser(),
             builder: (context, snapshot) {
+              Logger().d('debug: snapshot = $snapshot');
+
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
                   child: CircularProgressIndicator.adaptive(),

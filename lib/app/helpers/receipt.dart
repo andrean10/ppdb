@@ -7,6 +7,9 @@ import 'package:logger/logger.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path/path.dart' as ph;
+import 'package:ppdb/app/data/user_model/users_model.dart';
+import 'package:ppdb/app/modules/init/controllers/init_controller.dart';
+import 'package:ppdb/utils/constants_values_firebase.dart';
 import '../../shared/shared_method.dart';
 import '../../shared/shared_theme.dart';
 import '../../utils/constants_assets.dart';
@@ -17,7 +20,10 @@ import 'format_date_time.dart';
 abstract class Receipt {
   static final _dir = Directory('/storage/emulated/0/documents');
 
-  static Future<void> print(ProfileModel? profile) async {
+  static Future<void> print({
+    required InitController initC,
+    required ProfileModel? profile,
+  }) async {
     try {
       showSnackbar(
         content: 'Sedang Mengunduh...',
@@ -25,6 +31,20 @@ abstract class Receipt {
             ? SharedTheme.darkInfoColor
             : SharedTheme.lightInfoColor,
       );
+
+      final docUserModel = await initC.firestore
+          .collection(ConstantsValuesFirebase.colUser)
+          .withConverter(
+            fromFirestore: (snapshot, _) =>
+                UsersModel.fromJson(snapshot.data()!),
+            toFirestore: (value, _) => value.toJson(),
+          )
+          .doc(profile?.formSiswa?.createdBy)
+          .get();
+      final userModel = docUserModel.data();
+
+      Logger().d('debug: userModel = ${userModel.toString()}');
+
       final pdf = pw.Document();
 
       final img = await rootBundle.load(ConstantsAssets.imgLogo);
@@ -64,7 +84,7 @@ abstract class Receipt {
                   child: pw.Column(
                     children: [
                       pw.Text('Nomor Pendaftaran'),
-                      pw.Text('123456'),
+                      pw.Text('${userModel?.noRegis ?? '0'}'),
                     ],
                   ),
                 ),
@@ -171,8 +191,8 @@ abstract class Receipt {
         ),
       );
 
-      final file = File(ph
-          .join('${_dir.path}/${FileHelper.generateRandomFileName(uniqueNameFile: 'receipt', ext: 'pdf')}'))
+      final file = File(ph.join(
+          '${_dir.path}/${FileHelper.generateRandomFileName(uniqueNameFile: 'receipt', ext: 'pdf')}'))
         ..createSync(recursive: true)
         ..writeAsBytesSync(await pdf.save());
 

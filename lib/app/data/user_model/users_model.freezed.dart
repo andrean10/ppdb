@@ -25,6 +25,7 @@ mixin _$UsersModel {
   String get role => throw _privateConstructorUsedError;
   bool? get isApproved => throw _privateConstructorUsedError;
   bool? get isConfirmed => throw _privateConstructorUsedError;
+  int? get noRegis => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +44,8 @@ abstract class $UsersModelCopyWith<$Res> {
       String email,
       String role,
       bool? isApproved,
-      bool? isConfirmed});
+      bool? isConfirmed,
+      int? noRegis});
 }
 
 /// @nodoc
@@ -64,6 +66,7 @@ class _$UsersModelCopyWithImpl<$Res, $Val extends UsersModel>
     Object? role = null,
     Object? isApproved = freezed,
     Object? isConfirmed = freezed,
+    Object? noRegis = freezed,
   }) {
     return _then(_value.copyWith(
       username: null == username
@@ -86,6 +89,10 @@ class _$UsersModelCopyWithImpl<$Res, $Val extends UsersModel>
           ? _value.isConfirmed
           : isConfirmed // ignore: cast_nullable_to_non_nullable
               as bool?,
+      noRegis: freezed == noRegis
+          ? _value.noRegis
+          : noRegis // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -103,7 +110,8 @@ abstract class _$$UsersModelImplCopyWith<$Res>
       String email,
       String role,
       bool? isApproved,
-      bool? isConfirmed});
+      bool? isConfirmed,
+      int? noRegis});
 }
 
 /// @nodoc
@@ -122,6 +130,7 @@ class __$$UsersModelImplCopyWithImpl<$Res>
     Object? role = null,
     Object? isApproved = freezed,
     Object? isConfirmed = freezed,
+    Object? noRegis = freezed,
   }) {
     return _then(_$UsersModelImpl(
       username: null == username
@@ -144,6 +153,10 @@ class __$$UsersModelImplCopyWithImpl<$Res>
           ? _value.isConfirmed
           : isConfirmed // ignore: cast_nullable_to_non_nullable
               as bool?,
+      noRegis: freezed == noRegis
+          ? _value.noRegis
+          : noRegis // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -156,7 +169,8 @@ class _$UsersModelImpl with DiagnosticableTreeMixin implements _UsersModel {
       required this.email,
       required this.role,
       required this.isApproved,
-      required this.isConfirmed});
+      required this.isConfirmed,
+      this.noRegis});
 
   factory _$UsersModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UsersModelImplFromJson(json);
@@ -171,10 +185,12 @@ class _$UsersModelImpl with DiagnosticableTreeMixin implements _UsersModel {
   final bool? isApproved;
   @override
   final bool? isConfirmed;
+  @override
+  final int? noRegis;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UsersModel(username: $username, email: $email, role: $role, isApproved: $isApproved, isConfirmed: $isConfirmed)';
+    return 'UsersModel(username: $username, email: $email, role: $role, isApproved: $isApproved, isConfirmed: $isConfirmed, noRegis: $noRegis)';
   }
 
   @override
@@ -186,7 +202,8 @@ class _$UsersModelImpl with DiagnosticableTreeMixin implements _UsersModel {
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('role', role))
       ..add(DiagnosticsProperty('isApproved', isApproved))
-      ..add(DiagnosticsProperty('isConfirmed', isConfirmed));
+      ..add(DiagnosticsProperty('isConfirmed', isConfirmed))
+      ..add(DiagnosticsProperty('noRegis', noRegis));
   }
 
   @override
@@ -201,13 +218,14 @@ class _$UsersModelImpl with DiagnosticableTreeMixin implements _UsersModel {
             (identical(other.isApproved, isApproved) ||
                 other.isApproved == isApproved) &&
             (identical(other.isConfirmed, isConfirmed) ||
-                other.isConfirmed == isConfirmed));
+                other.isConfirmed == isConfirmed) &&
+            (identical(other.noRegis, noRegis) || other.noRegis == noRegis));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, username, email, role, isApproved, isConfirmed);
+  int get hashCode => Object.hash(
+      runtimeType, username, email, role, isApproved, isConfirmed, noRegis);
 
   @JsonKey(ignore: true)
   @override
@@ -229,7 +247,8 @@ abstract class _UsersModel implements UsersModel {
       required final String email,
       required final String role,
       required final bool? isApproved,
-      required final bool? isConfirmed}) = _$UsersModelImpl;
+      required final bool? isConfirmed,
+      final int? noRegis}) = _$UsersModelImpl;
 
   factory _UsersModel.fromJson(Map<String, dynamic> json) =
       _$UsersModelImpl.fromJson;
@@ -244,6 +263,8 @@ abstract class _UsersModel implements UsersModel {
   bool? get isApproved;
   @override
   bool? get isConfirmed;
+  @override
+  int? get noRegis;
   @override
   @JsonKey(ignore: true)
   _$$UsersModelImplCopyWith<_$UsersModelImpl> get copyWith =>

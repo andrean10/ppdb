@@ -13,6 +13,7 @@ _$UsersModelImpl _$$UsersModelImplFromJson(Map<String, dynamic> json) =>
       role: json['role'] as String,
       isApproved: json['isApproved'] as bool?,
       isConfirmed: json['isConfirmed'] as bool?,
+      noRegis: (json['noRegis'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$UsersModelImplToJson(_$UsersModelImpl instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$UsersModelImplToJson(_$UsersModelImpl instance) =>
       'role': instance.role,
       'isApproved': instance.isApproved,
       'isConfirmed': instance.isConfirmed,
+      'noRegis': instance.noRegis,
     };

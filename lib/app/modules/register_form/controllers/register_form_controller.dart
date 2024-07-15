@@ -116,6 +116,7 @@ class RegisterFormController extends GetxController {
   ];
 
   final dataTransportation = [
+    'Motor',
     'Jalan kaki',
     'Angkutan umum/bus/pete-pete',
     'Mobil/bus antar jemput',

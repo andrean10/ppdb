@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:logger/logger.dart';
 import 'package:ppdb/app/data/user_model/users_model.dart';
 import 'package:ppdb/app/helpers/receipt.dart';
 import 'package:ppdb/app/modules/widgets/buttons/custom_text_button.dart';
@@ -213,8 +212,6 @@ class DetailCandidatesView extends GetView<DetailCandidatesController> {
       final isApproved = user.isApproved!;
       final isConfirmed = user.isConfirmed!;
 
-      Logger().d('debug: user = ${user.toString()}');
-
       // Jika user diterima
       // maka status diterima muncul dan tidak ada tombol aksi
       if (isApproved && isConfirmed) {
@@ -237,7 +234,10 @@ class DetailCandidatesView extends GetView<DetailCandidatesController> {
             ),
             const Gap(21),
             CustomFilledButton(
-              onPressed: () => Receipt.print(controller.profile),
+              onPressed: () => Receipt.print(
+                initC: controller.initC,
+                profile: controller.profile,
+              ),
               isFilledTonal: false,
               icon: const Icon(Icons.print_rounded),
               child: const Text('Cetak Resi'),

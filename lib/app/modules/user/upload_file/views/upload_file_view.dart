@@ -51,15 +51,25 @@ class UploadFileView extends GetView<UploadFileController> {
                         builderShowDialog(
                           context: context,
                           file: data!.familyCard!,
+                          isPDF: true,
                         );
                       } else {
                         final data = await controller.pickFile(true);
 
                         if (data != null) {
-                          controller.builderUploadFile(
-                            data: data,
-                            key: 'familyCard',
-                          );
+                          if (data.path.isPDFFileName) {
+                            controller.builderUploadFile(
+                              data: data,
+                              key: 'familyCard',
+                            );
+                          } else {
+                            showSnackbar(
+                              content:
+                                  'File yang anda kirim tidak sesuai format! Cek kembali file yang anda kirim',
+                              backgroundColor: theme.colorScheme.error,
+                              duration: 3.seconds,
+                            );
+                          }
                         }
                       }
                     },
@@ -75,15 +85,25 @@ class UploadFileView extends GetView<UploadFileController> {
                         builderShowDialog(
                           context: context,
                           file: data!.birthCertificate!,
+                          isPDF: true,
                         );
                       } else {
                         final data = await controller.pickFile(true);
 
                         if (data != null) {
-                          controller.builderUploadFile(
-                            data: data,
-                            key: 'birthCertificate',
-                          );
+                          if (data.path.isPDFFileName) {
+                            controller.builderUploadFile(
+                              data: data,
+                              key: 'birthCertificate',
+                            );
+                          } else {
+                            showSnackbar(
+                              content:
+                                  'File yang anda kirim tidak sesuai format! Cek kembali file yang anda kirim',
+                              backgroundColor: theme.colorScheme.error,
+                              duration: 3.seconds,
+                            );
+                          }
                         }
                       }
                     },
@@ -99,15 +119,25 @@ class UploadFileView extends GetView<UploadFileController> {
                         builderShowDialog(
                           context: context,
                           file: data!.ktpFather!,
+                          isPDF: true,
                         );
                       } else {
                         final data = await controller.pickFile(true);
 
                         if (data != null) {
-                          controller.builderUploadFile(
-                            data: data,
-                            key: 'ktpFather',
-                          );
+                          if (data.path.isPDFFileName) {
+                            controller.builderUploadFile(
+                              data: data,
+                              key: 'ktpFather',
+                            );
+                          } else {
+                            showSnackbar(
+                              content:
+                                  'File yang anda kirim tidak sesuai format! Cek kembali file yang anda kirim',
+                              backgroundColor: theme.colorScheme.error,
+                              duration: 3.seconds,
+                            );
+                          }
                         }
                       }
                     },
@@ -123,14 +153,24 @@ class UploadFileView extends GetView<UploadFileController> {
                         builderShowDialog(
                           context: context,
                           file: data!.ktpMom!,
+                          isPDF: true,
                         );
                       } else {
                         final data = await controller.pickFile(true);
 
                         if (data != null) {
-                          controller.builderUploadFile(
-                            data: data,
-                            key: 'ktpMom',
+                          if (data.path.isPDFFileName) {
+                            controller.builderUploadFile(
+                              data: data,
+                              key: 'ktpMom',
+                            );
+                          }
+                        } else {
+                          showSnackbar(
+                            content:
+                                'File yang anda kirim tidak sesuai format! Cek kembali file yang anda kirim',
+                            backgroundColor: theme.colorScheme.error,
+                            duration: 3.seconds,
                           );
                         }
                       }
@@ -147,15 +187,25 @@ class UploadFileView extends GetView<UploadFileController> {
                         builderShowDialog(
                           context: context,
                           file: data!.certificate!,
+                          isPDF: true,
                         );
                       } else {
                         final data = await controller.pickFile(true);
 
                         if (data != null) {
-                          controller.builderUploadFile(
-                            data: data,
-                            key: 'certificate',
-                          );
+                          if (data.path.isPDFFileName) {
+                            controller.builderUploadFile(
+                              data: data,
+                              key: 'certificate',
+                            );
+                          } else {
+                            showSnackbar(
+                              content:
+                                  'File yang anda kirim tidak sesuai format! Cek kembali file yang anda kirim',
+                              backgroundColor: theme.colorScheme.error,
+                              duration: 3.seconds,
+                            );
+                          }
                         }
                       }
                     },
@@ -189,10 +239,19 @@ class UploadFileView extends GetView<UploadFileController> {
                         final data = await controller.pickFile(false);
 
                         if (data != null) {
-                          controller.builderUploadFile(
-                            data: data,
-                            key: 'photo',
-                          );
+                          if (data.path.isPDFFileName) {
+                            controller.builderUploadFile(
+                              data: data,
+                              key: 'photo',
+                            );
+                          } else {
+                            showSnackbar(
+                              content:
+                                  'File yang anda kirim tidak sesuai format! Cek kembali file yang anda kirim',
+                              backgroundColor: theme.colorScheme.error,
+                              duration: 3.seconds,
+                            );
+                          }
                         }
                       }
                     },
@@ -209,7 +268,10 @@ class UploadFileView extends GetView<UploadFileController> {
   void builderShowDialog({
     required BuildContext context,
     required String file,
+    required bool isPDF,
   }) {
+    final isApproved = controller.profileModel?.user.isApproved ?? false;
+
     showDialog(
       context: context,
       builder: (context) => Dialog.fullscreen(
@@ -217,6 +279,33 @@ class UploadFileView extends GetView<UploadFileController> {
           appBar: AppBar(
             leading: const CloseButton(),
             title: const Text('Pratinjau'),
+            actions: [
+              (!isApproved)
+                  ? CustomTextButton(
+                      onPressed: () async {
+                        final data = await controller.pickFile(isPDF);
+
+                        if (data != null) {
+                          if (data.path.isPDFFileName) {
+                            Get.back();
+                            controller.builderUploadFile(
+                              data: data,
+                              key: 'familyCard',
+                            );
+                          } else {
+                            showSnackbar(
+                              content:
+                                  'File yang anda kirim tidak sesuai format! Cek kembali file yang anda kirim',
+                              backgroundColor: Get.theme.colorScheme.error,
+                              duration: 3.seconds,
+                            );
+                          }
+                        }
+                      },
+                      child: const Text('Ganti File'),
+                    )
+                  : Container(),
+            ],
           ),
           body: SfPdfViewer.network(file),
         ),

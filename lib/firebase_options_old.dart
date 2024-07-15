@@ -14,7 +14,7 @@ import 'package:flutter/foundation.dart'
 ///   options: DefaultFirebaseOptions.currentPlatform,
 /// );
 /// ```
-class DefaultFirebaseOptions {
+class DefaultFirebaseOptionsOld {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
       return web;
@@ -27,7 +27,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        return windows;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -41,49 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAmzp6rhqmoJflUdqDAJaaF8dhDF2L4wp8',
-    appId: '1:937783297516:web:f33e497ba7a713eb4d6cc9',
-    messagingSenderId: '937783297516',
-    projectId: 'ppdb-pami-e93a1',
-    authDomain: 'ppdb-pami-e93a1.firebaseapp.com',
-    storageBucket: 'ppdb-pami-e93a1.appspot.com',
-    measurementId: 'G-NZMDJHK753',
+    apiKey: 'AIzaSyAfxkE-sBGLE2jNl0xY2_Lqz-Ubxl_yqfY',
+    appId: '1:181278162179:web:e9fbe973e313eecb11bd36',
+    messagingSenderId: '181278162179',
+    projectId: 'ppdb-pami-7651b',
+    authDomain: 'ppdb-pami-7651b.firebaseapp.com',
+    storageBucket: 'ppdb-pami-7651b.appspot.com',
+    measurementId: 'G-H06DKM3C31',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD0y9lOtfK30XciRospbkOOQJ-yjMvsOCg',
-    appId: '1:937783297516:android:6c1de0d8addb8d454d6cc9',
-    messagingSenderId: '937783297516',
-    projectId: 'ppdb-pami-e93a1',
-    storageBucket: 'ppdb-pami-e93a1.appspot.com',
+    apiKey: 'AIzaSyAAHMel2MyDJSf464an9yGPS_v87KIM0gE',
+    appId: '1:181278162179:android:cb20b6447968538911bd36',
+    messagingSenderId: '181278162179',
+    projectId: 'ppdb-pami-7651b',
+    storageBucket: 'ppdb-pami-7651b.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyC8VTAungI-CRzIfr03c3xH_sMu0FWN8Z8',
-    appId: '1:937783297516:ios:b3828368f50260194d6cc9',
-    messagingSenderId: '937783297516',
-    projectId: 'ppdb-pami-e93a1',
-    storageBucket: 'ppdb-pami-e93a1.appspot.com',
+    apiKey: 'AIzaSyDiwjbxJIG0q2yQHDbmIICEGt9QiYrEps4',
+    appId: '1:181278162179:ios:b9790d75fe8ab85d11bd36',
+    messagingSenderId: '181278162179',
+    projectId: 'ppdb-pami-7651b',
+    storageBucket: 'ppdb-pami-7651b.appspot.com',
     iosBundleId: 'com.example.ppdb',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyC8VTAungI-CRzIfr03c3xH_sMu0FWN8Z8',
-    appId: '1:937783297516:ios:b3828368f50260194d6cc9',
-    messagingSenderId: '937783297516',
-    projectId: 'ppdb-pami-e93a1',
-    storageBucket: 'ppdb-pami-e93a1.appspot.com',
+    apiKey: 'AIzaSyDiwjbxJIG0q2yQHDbmIICEGt9QiYrEps4',
+    appId: '1:181278162179:ios:b9790d75fe8ab85d11bd36',
+    messagingSenderId: '181278162179',
+    projectId: 'ppdb-pami-7651b',
+    storageBucket: 'ppdb-pami-7651b.appspot.com',
     iosBundleId: 'com.example.ppdb',
   );
-
-  static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyAmzp6rhqmoJflUdqDAJaaF8dhDF2L4wp8',
-    appId: '1:937783297516:web:16aef200d2526ceb4d6cc9',
-    messagingSenderId: '937783297516',
-    projectId: 'ppdb-pami-e93a1',
-    authDomain: 'ppdb-pami-e93a1.firebaseapp.com',
-    storageBucket: 'ppdb-pami-e93a1.appspot.com',
-    measurementId: 'G-MLBDY3G6CP',
-  );
-
 }

@@ -100,7 +100,8 @@ class LoginController extends GetxController {
         await _initC.localStorage.write(ConstantsValues.role, userModel?.role);
 
         // cek role
-        if (userModel?.role == ROLE.admin.name) {
+        if (userModel?.role == ROLE.admin.name ||
+            userModel?.role == ROLE.kepsek.name) {
           Get.offAllNamed(
             Routes.MAIN,
             arguments: userModel!.role,
